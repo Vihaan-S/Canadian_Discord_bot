@@ -44,6 +44,6 @@ intents.reactions = True  # Required to handle reactions
 
 # Create an instance of the custom client with the specified intents
 bot = Client(intents=intents)
-
+# hi
 # Run the bot using the token from the environment variables
 bot.run(os.getenv('BOT_TOKEN'))
