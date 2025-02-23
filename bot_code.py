@@ -2,6 +2,8 @@ import discord
 from dotenv import load_dotenv
 import os
 
+from gemini import gemini_api
+
 # Load environment variables from a .env file
 load_dotenv()
 
@@ -15,27 +17,24 @@ class Client(discord.Client):
     async def on_message(self, message):
         # Ignore messages sent by the bot itself
         if message.author == self.user:
+            print("Ignoring message from self")
             return
+
+        print(f"Received message: {message.content} from {message.author}")
+        response_text = gemini_api(message.content)
         
-        # Check if the message ends with a period
-        if message.content.endswith('.'):
-            # Remove the period and add 'eh.' instead
-            modified_message = message.content[:-1] + ' eh.'
-            await message.channel.send(modified_message)
-        
-        # Check if the message contains "eh" (case insensitive)
-        if 'eh' in message.content.lower():
-            # React with "🇪" and "🇭" emojis
-            await message.add_reaction('🇪')
-            await message.add_reaction('🇭')
+        await message.channel.send(response_text)
+        print(f"Sent response: {response_text}")
 
     # Event handler for when a reaction is added to a message
     async def on_reaction_add(self, reaction, user):
         # Ignore reactions added by the bot itself
         if user == self.user:
+            print("Ignoring reaction from self")
             return
         
         await reaction.message.channel.send('You reacting eh?!')
+        print(f"Reacted to message: {reaction.message.content}")
 
 # Define the intents required by the bot
 intents = discord.Intents.default()
@@ -44,6 +43,6 @@ intents.reactions = True  # Required to handle reactions
 
 # Create an instance of the custom client with the specified intents
 bot = Client(intents=intents)
-# hi
+
 # Run the bot using the token from the environment variables
 bot.run(os.getenv('BOT_TOKEN'))
