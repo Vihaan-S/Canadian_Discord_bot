@@ -3,4 +3,3 @@
 3. Type in any prompt or sentence for Eh Bot to respond to using Google Gemini.
   - Type in any prompt for an answer in a Canadian manner using Google Gemini.
   - React to a message for Eh Bot to respond with "You reacting eh?!"
-4. Team members: Vihaan Shah, Dhyey Hansoti
