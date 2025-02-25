@@ -13,7 +13,7 @@ def gemini_api(input_text):
     response = client.models.generate_content(
         model="gemini-2.0-flash", contents={
             input_text,
-            "given this message from the user, respond in a and in a nice and very steriotypical Canadian way"
+            "given this message from the user, respond in a and in a nice and very steriotypical Canadian way."
         }   
     )
     
